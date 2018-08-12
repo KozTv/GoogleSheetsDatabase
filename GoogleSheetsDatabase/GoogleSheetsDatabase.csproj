@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard1.6</TargetFramework>
     <Authors>Alex Paklonski</Authors>
+    <Company>Alex Paklonski</Company>
     <Description>Use your Google Sheet as a DB</Description>
     <PackageProjectUrl>https://github.com/KozTv/GoogleSheetsDatabase</PackageProjectUrl>
     <RepositoryUrl>https://github.com/KozTv/GoogleSheetsDatabase</RepositoryUrl>
