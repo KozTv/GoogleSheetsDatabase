@@ -48,18 +48,22 @@ var result = await sheetsDatabase.GetAsync<ConfigurationData>("Sheet1", "DEV Con
 
 ### Prerequisites
 
-1. Create a new Google Sheet and copy its `spreadsheetId`.
+1. Create a new Google Sheet and copy its `spreadsheetId`:
+![image4](https://user-images.githubusercontent.com/2159166/44754429-7c77c400-ab2a-11e8-83ec-198cb0acdf3f.png)
+In the screenshot above `spreadsheetId=1ax3TUtzIMbTBxFXnQ85lE91HoCVphB0-dnK-1USzd7c`.
+There is 1 sheet with name “Sheet1”. This represents a table “Sheet1”.
+
 1. Turn on the Google Sheets API.
    1. Visit [Google Developers Console](https://console.developers.google.com/project) and create a new project (or use an existing one).
-
+![image3](https://user-images.githubusercontent.com/2159166/44754428-7c77c400-ab2a-11e8-941f-e62c53a36a59.png)
    1. Enable Sheets API for your project.
-
+![image5](https://user-images.githubusercontent.com/2159166/44754431-7d105a80-ab2a-11e8-9620-eb9bc2af5a84.png)
    1. Create service account key for your project.
-
-   1. Download JSON and copy private_key and client_email.
-   
+![image6](https://user-images.githubusercontent.com/2159166/44754422-771a7980-ab2a-11e8-8e5a-1f47d5a54ffa.png)
+   1. Download JSON and copy `private_key` and `client_email`.
+   ![image2](https://user-images.githubusercontent.com/2159166/44754427-7bdf2d80-ab2a-11e8-9344-2cbca461779d.png)
    1. Share your Google Sheet with the email from the previous step.
-
+![image1](https://user-images.githubusercontent.com/2159166/44754425-7bdf2d80-ab2a-11e8-9a94-b14caa381cd9.png)
 ### Installing
 Available at nuget:
 
