@@ -46,6 +46,9 @@ Read a value by key:
 var result = await sheetsDatabase.GetAsync<ConfigurationData>("Sheet1", "DEV Config 1");
 ```
 
+After writing some data it will look like this in Google Sheets:
+![2018-08-29_0144](https://user-images.githubusercontent.com/2159166/44755039-22c4c900-ab2d-11e8-9cbb-0ced19575a6e.png)
+
 ### Prerequisites
 
 1. Create a new Google Sheet and copy its `spreadsheetId`:
@@ -68,3 +71,10 @@ There is 1 sheet with name “Sheet1”. This represents a table “Sheet1”.
 Available at nuget:
 
     PM> Install-Package GoogleSheetsDatabase
+    
+## Quotas
+
+You can check quotas for your project in [Google Developers Console](https://console.developers.google.com/project).  
+By default Google Sheets API sets the following limits:  
+- Write requests per 100 seconds per user: 100  
+- Read requests per 100 seconds per user: 100  
