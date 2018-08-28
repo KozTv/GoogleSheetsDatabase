@@ -78,3 +78,7 @@ You can check quotas for your project in [Google Developers Console](https://con
 By default Google Sheets API sets the following limits:  
 - Write requests per 100 seconds per user: 100  
 - Read requests per 100 seconds per user: 100  
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
