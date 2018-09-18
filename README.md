@@ -2,6 +2,8 @@
 A small helper build on top of [Sheets API v4](https://developers.google.com/sheets/api/) which turns your Google Sheets into a key-value storage. 
 Values are serialized to JSON to be human-readable and easily editable using standard Google Sheets web interface.
 
+[![Build Status](https://dev.azure.com/AlexPaklonski/GoogleSheetsDatabase/_apis/build/status/KozTv.GoogleSheetsDatabase)](https://dev.azure.com/AlexPaklonski/GoogleSheetsDatabase/_build/latest?definitionId=1)
+
 ## Getting Started
 Let's say we want to store some additional environment-specific configuration data and access it at runtime by environment name.
 Define a model:
