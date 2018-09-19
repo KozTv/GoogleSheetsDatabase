@@ -44,5 +44,5 @@ steps:
   inputs:
     command: push
     nuGetFeedType: external
-    publishFeedCredentials: 'NuGet.org'
+    publishFeedCredentials: Nuget
     versioningScheme: byBuildNumber
