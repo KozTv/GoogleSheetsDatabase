@@ -39,10 +39,4 @@ steps:
     majorVersion: '$(major)'
     minorVersion: '$(minor)'
     patchVersion: '$(rev:.r)'
-    
-- task: NuGetCommand@2
-  inputs:
-    command: push
-    nuGetFeedType: external
-    publishFeedCredentials: Nuget
-    versioningScheme: byBuildNumber
+
