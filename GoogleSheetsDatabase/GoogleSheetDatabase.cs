@@ -19,7 +19,7 @@ namespace GoogleSheetsDatabase
         private readonly string _spreadsheetId;
         private readonly IDictionary<string, int> _sheetIds;
         private static readonly string[] _scopes = { SheetsService.Scope.Spreadsheets };
-        private static readonly string _appendRange = "A1:B1";
+        private static readonly string _appendRange = "A1:C1";
 
         public GoogleSheetDatabase(string spreadsheetId, string sheetsDatabaseClientEmail, string sheetsDatabasePrivateKey)
         {
@@ -54,8 +54,6 @@ namespace GoogleSheetsDatabase
 
         }
 
-
-
         public async Task<T> GetAsync<T>(string table, string uId)
         {
             string rawData = await GetStringAsync(table, uId);
@@ -77,7 +75,7 @@ namespace GoogleSheetsDatabase
             try
             {
                 ValueRange response = await request.ExecuteAsync();
-                return response.Values.FirstOrDefault()?.LastOrDefault()?.ToString();
+                return response.Values.FirstOrDefault()?[1].ToString();
             }
             catch (GoogleApiException ex)
             {
@@ -92,8 +90,6 @@ namespace GoogleSheetsDatabase
             }
 
         }
-
-
 
         public async Task SetAsync<T>(string table, string uId, T value)
         {
@@ -128,7 +124,7 @@ namespace GoogleSheetsDatabase
 
         private string A1NotationByTableAndUid(string table, string uId)
         {
-            return $"{table}!{GetNamedRangeNameForKey(uId)}";
+            return $"{table}!{GetNamedRangeNameForKey(table, uId)}";
         }
 
         private string A1NotationByTableAndA1Range(string table, string a1Range)
@@ -154,7 +150,7 @@ namespace GoogleSheetsDatabase
             request.ValueInputOption = SpreadsheetsResource.ValuesResource.AppendRequest.ValueInputOptionEnum.RAW;
             var response = await request.ExecuteAsync();
 
-            ApplyNameToRange(table, response.Updates.UpdatedRange, GetNamedRangeNameForKey(uId));
+            ApplyNameToRange(table, response.Updates.UpdatedRange, GetNamedRangeNameForKey(table, uId));
         }
 
         private static ValueRange CreateValueRange(string uId, string value)
@@ -167,7 +163,8 @@ namespace GoogleSheetsDatabase
                     new List<object>
                     {
                         uId,
-                        value
+                        value,
+                        DateTimeOffset.UtcNow
                     }
                 }
             };
@@ -176,23 +173,22 @@ namespace GoogleSheetsDatabase
         private GridRange A1RangeToGridRange(string tableName, string a1Range)
         {
             string a1 = a1Range.Substring(tableName.Length + 1);
-            string row = a1.Substring(a1.LastIndexOf(":B") + 2);
+            string row = a1.Substring(a1.LastIndexOf(":") + 2);
             int rowIndex = int.Parse(row);
             return new GridRange
             {
                 SheetId = _sheetIds[tableName],
                 StartColumnIndex = 0,
-                EndColumnIndex = 2,
+                EndColumnIndex = 3,
                 StartRowIndex = rowIndex - 1,
                 EndRowIndex = rowIndex
             };
 
-
         }
 
-        private string GetNamedRangeNameForKey(string primaryKey)
+        private string GetNamedRangeNameForKey(string table, string primaryKey)
         {
-            byte[] bytes = Encoding.ASCII.GetBytes(primaryKey);
+            byte[] bytes = Encoding.ASCII.GetBytes(_sheetIds[table] + primaryKey);
             SHA256 hashstring = SHA256.Create();
             byte[] hash = hashstring.ComputeHash(bytes);
             string hex = BitConverter.ToString(hash);
